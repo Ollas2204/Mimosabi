@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIMOSABI — Market Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── MIMOSABI 2026 CATALOG THEME ── */
+/* Olive green, terracotta stripe, teal stripe, earthy crafty */
+:root{
+  --olive:#A8B05A;
+  --olive-dark:#8A9245;
+  --olive-light:#BEC76E;
+  --terracotta:#C4714A;
+  --teal:#4A9B8E;
+  --ink:#2D3018;
+  --white:#FFFFFF;
+  --off-white:#F5F2EC;
+  --muted:rgba(45,48,24,.55);
+  --border:rgba(45,48,24,.2);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--olive);color:var(--ink);min-height:100vh;overflow-x:hidden}
+
+/* ── GRAIN TEXTURE (subtle, like catalog paper) ── */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:1}
+
+/* ── BANNER — terracotta stripe like catalog ── */
+.banner{background:var(--terracotta);padding:9px 20px;text-align:center;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.25em;text-transform:lowercase;color:var(--white)}
+.dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--white);margin-right:7px;animation:pulse 2s ease-in-out infinite;opacity:.8}
+@keyframes pulse{0%,100%{opacity:.8;transform:scale(1)}50%{opacity:.3;transform:scale(.6)}}
+
+/* ── TEAL STRIPE ── */
+.teal-stripe{background:var(--teal);padding:5px 20px;text-align:center;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.3em;text-transform:lowercase;color:var(--white);opacity:.9}
+
+/* ── HEADER ── */
+header{padding:20px 40px;border-bottom:2px solid rgba(45,48,24,.25);display:flex;align-items:center;justify-content:space-between;background:var(--olive);position:sticky;top:0;z-index:100}
+.logo{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;letter-spacing:.04em;line-height:1;color:var(--ink)}
+.logo span{color:var(--terracotta)}
+.sub-logo{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.25em;color:var(--muted);text-transform:lowercase;margin-top:3px}
+.badge{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.12em;text-transform:lowercase;padding:5px 14px;border:1.5px solid var(--ink);color:var(--ink);border-radius:20px;background:transparent}
+.badge-live{background:var(--terracotta);color:var(--white);border-color:var(--terracotta)}
+
+/* ── HERO ── */
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:52px 40px 36px;max-width:1400px;margin:0 auto;align-items:start}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,64px);font-weight:900;line-height:1.04;margin-bottom:16px;color:var(--ink)}
+.hero h1 em{font-style:italic;color:var(--terracotta);display:block}
+.hero-desc{font-size:13px;color:var(--muted);line-height:1.75;max-width:420px;margin-bottom:22px}
+.stats{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:22px}
+.stat-n{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--ink);line-height:1}
+.stat-l{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--muted);text-transform:lowercase;margin-top:2px}
+.pill{padding:5px 14px;border:1.5px solid var(--ink);border-radius:20px;font-size:11px;color:var(--ink);font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.06em}
+
+/* ── SEARCH PANEL ── */
+.search-wrap{background:var(--white);border:2px solid var(--ink);border-radius:4px;padding:24px;box-shadow:5px 5px 0 var(--ink)}
+.search-wrap h3{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:lowercase;color:var(--terracotta);margin-bottom:16px;padding-bottom:12px;border-bottom:1.5px solid rgba(45,48,24,.15)}
+.search-box{display:flex;gap:8px;margin-bottom:14px}
+.search-box input{flex:1;background:var(--off-white);border:1.5px solid var(--border);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:14px;padding:12px 16px;border-radius:3px;outline:none;transition:border-color .2s}
+.search-box input:focus{border-color:var(--terracotta);box-shadow:0 0 0 3px rgba(196,113,74,.1)}
+.search-box input::placeholder{color:var(--muted)}
+.btn-go{padding:12px 22px;background:var(--terracotta);border:none;color:var(--white);font-family:'Playfair Display',serif;font-size:15px;font-style:italic;cursor:pointer;border-radius:3px;transition:all .2s;white-space:nowrap;box-shadow:3px 3px 0 var(--ink)}
+.btn-go:hover{background:var(--teal);transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}
+.btn-go:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.quick-tags{display:flex;flex-wrap:wrap;gap:6px}
+.qtag{padding:5px 12px;border:1.5px solid var(--border);border-radius:2px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.06em;color:var(--muted);cursor:pointer;transition:all .2s;background:var(--off-white)}
+.qtag:hover{border-color:var(--terracotta);color:var(--terracotta);background:rgba(196,113,74,.06)}
+
+/* ── STATUS BAR ── */
+#statusBar{display:none;margin-top:14px;padding:12px 16px;background:var(--off-white);border:1.5px solid var(--terracotta);border-radius:3px;border-left:4px solid var(--terracotta)}
+#statusLabel{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:lowercase;color:var(--terracotta)}
+#statusMsg{font-size:11px;color:var(--muted);font-style:italic;margin-top:4px}
+#statusFill{height:100%;background:linear-gradient(90deg,var(--terracotta),var(--teal));border-radius:2px;width:0%;transition:width .4s ease}
+
+/* ── TERRACOTTA SECTION DIVIDER ── */
+.stripe-divider{height:6px;background:linear-gradient(90deg,var(--terracotta) 60%,var(--teal) 60%);margin:0 0 40px}
+
+/* ── SECTIONS ── */
+.section{max-width:1400px;margin:0 auto;padding:0 40px 44px}
+.section-hdr{display:flex;align-items:baseline;gap:14px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--ink)}
+.section-hdr h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--ink)}
+.section-hdr .sub{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:lowercase;color:var(--muted)}
+
+/* ── HEATMAP CARDS ── */
+.heatmap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.heat-card{background:var(--white);border:2px solid var(--ink);border-radius:4px;padding:20px;position:relative;overflow:hidden;box-shadow:4px 4px 0 var(--ink);transition:transform .18s,box-shadow .18s}
+.heat-card:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.heat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px}
+.heat-hot::before{background:var(--terracotta)}
+.heat-warm::before{background:var(--teal)}
+.heat-cool::before{background:var(--olive-dark)}
+.heat-later::before{background:rgba(45,48,24,.2)}
+.heat-score{font-family:'Playfair Display',serif;font-size:48px;font-weight:900;color:var(--ink);line-height:1;margin-bottom:6px}
+.heat-title{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:lowercase;color:var(--ink);margin-bottom:8px;font-weight:700}
+.heat-desc{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:12px}
+.heat-tag{display:inline-block;padding:4px 10px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.1em;text-transform:lowercase;border-radius:2px;border:1.5px solid}
+.tag-now{background:rgba(196,113,74,.1);color:var(--terracotta);border-color:var(--terracotta)}
+.tag-soon{background:rgba(74,155,142,.1);color:var(--teal);border-color:var(--teal)}
+.tag-later{background:rgba(45,48,24,.08);color:var(--muted);border-color:var(--muted)}
+
+/* ── GLOBAL DATA ── */
+.global-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:20px}
+.gdata-card{background:var(--white);border:2px solid var(--ink);border-radius:4px;padding:18px;box-shadow:3px 3px 0 var(--ink)}
+.gdata-country{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.12em;text-transform:lowercase;color:var(--muted);margin-bottom:6px}
+.gdata-val{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--ink);line-height:1;margin-bottom:4px}
+.gdata-desc{font-size:11px;color:var(--muted);line-height:1.5}
+
+/* ── WHY NOW ── */
+.why-now{background:var(--ink);border-radius:4px;padding:28px;margin-top:12px;border:2px solid var(--ink)}
+.why-now-title{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:lowercase;color:var(--teal);margin-bottom:16px}
+.why-card{padding-left:16px;border-left:3px solid var(--terracotta)}
+.why-card strong{color:var(--white);display:block;margin-bottom:3px;font-size:13px}
+.why-card p{font-size:12px;color:rgba(245,242,236,.5);line-height:1.65}
+
+/* ── TIMELINE ── */
+.timeline{position:relative;padding-left:26px}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:28px}
+.tl-dot{position:absolute;left:-22px;top:5px;width:10px;height:10px;border-radius:50%;border:2px solid var(--terracotta);background:var(--olive)}
+.tl-item.active .tl-dot{background:var(--terracotta)}
+.tl-year{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.12em;text-transform:lowercase;color:var(--terracotta);margin-bottom:4px}
+.tl-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.tl-desc{font-size:12px;color:var(--muted);line-height:1.65}
+.tl-chip{display:inline-block;padding:3px 10px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.06em;text-transform:lowercase;border-radius:2px;margin-top:6px;border:1.5px solid}
+.chip-done{background:rgba(74,155,142,.1);color:var(--teal);border-color:var(--teal)}
+.chip-now{background:rgba(196,113,74,.1);color:var(--terracotta);border-color:var(--terracotta)}
+.chip-plan{background:rgba(45,48,24,.08);color:var(--muted);border-color:var(--muted)}
+
+/* ── INVESTOR BRIEF ── */
+.investor-wrap{background:var(--ink);border-radius:4px;padding:28px;border:2px solid var(--ink)}
+.investor-title{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:lowercase;color:var(--teal);margin-bottom:16px}
+.investor-wrap p{color:rgba(245,242,236,.75);line-height:1.85;font-size:14px;max-width:800px;margin-bottom:18px}
+.investor-wrap strong{color:var(--white)}
+.investor-wrap em{color:var(--terracotta);font-style:normal;font-weight:500}
+.inv-card{padding:14px;border-radius:3px;border:1px solid rgba(245,242,236,.12);font-size:11px;color:rgba(245,242,236,.55);line-height:1.6}
+.inv-card strong{color:var(--white);display:block;margin-bottom:4px;font-size:12px}
+
+/* ── FORECAST CARDS ── */
+.forecast-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.fcard{background:var(--white);border:2px solid var(--ink);border-radius:4px;padding:18px;position:relative;transition:all .18s;box-shadow:4px 4px 0 var(--ink)}
+.fcard:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.fcard-rank{font-family:'Playfair Display',serif;font-size:40px;font-weight:900;color:rgba(45,48,24,.07);position:absolute;top:12px;right:14px;line-height:1}
+.fcard-icon{font-size:24px;margin-bottom:10px}
+.fcard-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.fcard-desc{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:10px}
+.fcard-score{display:flex;align-items:center;gap:8px}
+.fcard-bar{flex:1;height:3px;background:rgba(45,48,24,.12);border-radius:2px;overflow:hidden}
+.fcard-fill{height:100%;background:linear-gradient(90deg,var(--terracotta),var(--teal));border-radius:2px;width:0%;transition:width 1.2s ease}
+.fcard-pct{font-family:'Space Mono',monospace;font-size:9px;color:var(--ink);font-weight:700}
+
+/* ── THINKING / LOADING ── */
+.thinking{background:rgba(45,48,24,.06);border:2px solid var(--terracotta);border-left:5px solid var(--terracotta);border-radius:4px;padding:18px 20px;margin-bottom:16px;display:none}
+.thinking.on{display:block}
+.thinking-lbl{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:lowercase;color:var(--terracotta);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.dots span{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--terracotta);animation:db 1.4s ease-in-out infinite}
+.dots span:nth-child(2){animation-delay:.2s}
+.dots span:nth-child(3){animation-delay:.4s}
+@keyframes db{0%,80%,100%{transform:scale(.6);opacity:.4}40%{transform:scale(1);opacity:1}}
+.thinking-txt{font-size:12px;color:var(--muted);font-style:italic}
+
+/* ── PROGRESS ── */
+.prog-wrap{height:4px;background:rgba(45,48,24,.12);border-radius:2px;margin-bottom:20px;display:none}
+.prog-wrap.on{display:block}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--terracotta),var(--teal));border-radius:2px;width:0%;transition:width .4s ease}
+
+/* ── ERROR ── */
+.err{padding:14px 18px;background:rgba(196,113,74,.1);border:2px solid var(--terracotta);border-radius:4px;font-size:13px;color:var(--terracotta);margin-bottom:16px;display:none}
+.err.on{display:block}
+
+/* ── RESULT CARDS ── */
+.result-wrap{display:none}
+.result-wrap.on{display:block}
+.meta-chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.mchip{display:flex;align-items:center;gap:5px;padding:5px 12px;background:var(--white);border:1.5px solid var(--border);border-radius:20px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.1em;text-transform:lowercase;color:var(--muted)}
+.mchip .d{width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.rcard{background:var(--white);border:2px solid var(--ink);border-radius:4px;overflow:hidden;margin-bottom:14px;box-shadow:4px 4px 0 var(--ink)}
+.rcard-hdr{padding:14px 20px;border-bottom:2px solid var(--ink);display:flex;align-items:center;justify-content:space-between;background:var(--terracotta)}
+.rcard-hdr h4{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:lowercase;color:var(--white)}
+.rcard-body{padding:20px;font-size:13px;line-height:1.85;color:var(--ink)}
+.rcard-body h3{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink);margin:18px 0 7px}
+.rcard-body h3:first-child{margin-top:0}
+.rcard-body p{margin-bottom:10px}
+.rcard-body ul,.rcard-body ol{padding-left:18px;margin-bottom:10px}
+.rcard-body li{margin-bottom:5px}
+.rcard-body strong{color:var(--terracotta)}
+.rcard-body em{color:var(--teal);font-style:normal;font-weight:600}
+
+/* ── EXPORT ── */
+.export-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.exp-card{background:var(--white);border:2px solid var(--ink);border-radius:4px;padding:18px;text-align:center;transition:all .18s;box-shadow:4px 4px 0 var(--ink)}
+.exp-card:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.exp-icon{font-size:24px;margin-bottom:8px}
+.exp-title{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:lowercase;color:var(--ink);margin-bottom:4px;font-weight:700}
+.exp-desc{font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.5}
+.exp-btn{padding:8px 14px;background:var(--ink);border:none;color:var(--white);font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.06em;text-transform:lowercase;cursor:pointer;border-radius:3px;width:100%;transition:all .2s}
+.exp-btn:hover{background:var(--terracotta)}
+.exp-btn:disabled{opacity:.35;cursor:not-allowed}
+.export-includes{margin-top:14px;background:var(--white);border:2px solid var(--ink);border-radius:4px;padding:20px;box-shadow:4px 4px 0 var(--ink)}
+.export-includes-title{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:lowercase;color:var(--muted);margin-bottom:12px}
+
+/* ── COPY BTN ── */
+.cbtn{padding:5px 12px;background:transparent;border:1.5px solid rgba(245,242,236,.3);color:rgba(245,242,236,.6);font-family:'Space Mono',monospace;font-size:8px;cursor:pointer;border-radius:3px;transition:all .2s}
+.cbtn:hover{border-color:var(--white);color:var(--white)}
+
+/* ── DIVIDER ── */
+.divider{max-width:1400px;margin:0 auto;padding:0 40px}
+.divider-line{height:2px;background:rgba(45,48,24,.2)}
+
+/* ── WATERMARK ── */
+.wmark{text-align:center;padding:28px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.25em;text-transform:lowercase;color:var(--muted)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  header{padding:16px 20px}
+  .hero{grid-template-columns:1fr;padding:28px 20px}
+  .section{padding:0 20px 32px}
+  .export-grid{grid-template-columns:1fr 1fr}
+}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--olive)}
+::-webkit-scrollbar-thumb{background:var(--terracotta);border-radius:2px}
+</style>
+</head>
+<body>
+
+
+
+<div class="banner"><span class="dot"></span>mimosabi intelligence — ai + real-time web search · live data may 2026</div>
+<div class="teal-stripe">market intelligence · est. 2008 · cimahi, west java · walk crafty</div>
+
+<header>
+  <div>
+    <div class="logo">MIMO<span>SABI</span></div>
+    <div class="sub-logo">Market Intelligence · Est. 2008 · Cimahi, West Java</div>
+  </div>
+  <div style="display:flex;gap:8px">
+    <div class="badge badge-live"><span class="dot" style="width:5px;height:5px;background:white"></span>live</div>
+    <div class="badge">walk crafty</div>
+  </div>
+</header>
+
+<div class="hero">
+  <div>
+    <h1>Handmade Shoe<br><em>Market Intelligence</em></h1>
+    <p class="hero-desc">Real-time market research for MIMOSABI — women's handmade artisan shoes from Cimahi, West Java. May 2026 trends, competitors, pricing, export opportunities, and next collection forecast.</p>
+    <div class="stats">
+      <div class="stat"><div class="stat-n">2008</div><div class="stat-l">Est. Year</div></div>
+      <div class="stat"><div class="stat-n">$3.02B</div><div class="stat-l">ID Market 2024</div></div>
+      <div class="stat"><div class="stat-n">4.26%</div><div class="stat-l">CAGR 2025–2033</div></div>
+      <div class="stat"><div class="stat-n">$6.5B</div><div class="stat-l">ID Shoe Exports</div></div>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px">
+      <span class="pill">Higher Flats</span>
+      <span class="pill">Mary Janes</span>
+      <span class="pill">Slides</span>
+      <span class="pill">Handpainted</span>
+      <span class="pill">Kanvas Perca</span>
+    </div>
+  </div>
+
+  <div class="search-wrap">
+    <h3>✦ Product & Design Research</h3>
+    <div class="search-box">
+      <input type="text" id="queryInput" placeholder="Ketik produk atau desain... contoh: mary jane perca" />
+      <button class="btn-go" id="goBtn" onclick="runAnalysis()">Analyze ↗</button>
+    </div>
+    <div class="quick-tags" id="quickTags"></div>
+    <p style="font-size:10px;color:rgba(245,239,230,.2);margin-top:10px;font-family:'Space Mono',monospace;letter-spacing:.04em">Type any product or design — AI will run Market, Competitor, Forecast &amp; Export analysis in one go</p>
+  </div>
+</div>
+
+<div class="stripe-divider"></div>
+<!-- STRATEGIC HEATMAP -->
+<div class="section">
+  <div class="section-hdr"><h2>Strategic Heat Map</h2><span class="sub">Mimosabi strategic opportunities — May 2026</span></div>
+  <div class="heatmap-grid">
+    <div class="heat-card heat-hot">
+      <div class="heat-score">94</div>
+      <div class="heat-title">TikTok Shop + Flat Shoes</div>
+      <div class="heat-desc">Tren 2026: flat shoes feminine & retro sedang puncak. Ballet flats, mary jane di-endorse runway global & TikTok FYP Indonesia. DNA Mimosabi = konten organik gratis.</div>
+      <span class="heat-tag tag-now">Do It Now</span>
+    </div>
+    <div class="heat-card heat-hot">
+      <div class="heat-score">89</div>
+      <div class="heat-title">Shopee Revival Campaign</div>
+      <div class="heat-desc">Shopee owns 48% of women's e-commerce in Indonesia. Reopen store with new collection + "artisan reborn 2026" story + flash sale = fast traction within 30 days.</div>
+      <span class="heat-tag tag-now">This Month Priority</span>
+    </div>
+    <div class="heat-card heat-warm">
+      <div class="heat-score">83</div>
+      <div class="heat-title">Handpainted Custom Line</div>
+      <div class="heat-desc">Custom shoe painting segment grew 35% YoY. Mimosabi has unique artisan skill — premium pricing Rp 400–800k justified. Making-of content = viral potential.</div>
+      <span class="heat-tag tag-soon">Month 2–3</span>
+    </div>
+    <div class="heat-card heat-warm">
+      <div class="heat-score">77</div>
+      <div class="heat-title">Etsy + Global Artisan</div>
+      <div class="heat-desc">Indonesia shoe exports $6.5B, up 9% YoY. Artisan + "Made with Love" story = premium on Etsy US/EU ($45–120/pair). Mimosabi exported before — just needs reactivation.</div>
+      <span class="heat-tag tag-soon">Month 3–5</span>
+    </div>
+    <div class="heat-card heat-warm">
+      <div class="heat-score">71</div>
+      <div class="heat-title">Reseller & Mitra Program</div>
+      <div class="heat-desc">Previously successful distributor program. Target: 10 active resellers in Jabodetabek + Bandung. Needs ready catalog + competitive wholesale pricing.</div>
+      <span class="heat-tag tag-soon">Month 3–6</span>
+    </div>
+    <div class="heat-card heat-later">
+      <div class="heat-score">54</div>
+      <div class="heat-title">Pop-up & Offline Retail</div>
+      <div class="heat-desc">INACRAFT 2026, Brightspot Market, or Bandung/Jakarta creative bazaars. Good for brand visibility but requires more capital. Do this after digital channels are stable.</div>
+      <span class="heat-tag tag-later">Month 6+</span>
+    </div>
+  </div>
+</div>
+
+<!-- GLOBAL MARKET DATA -->
+<div class="section">
+  <div class="section-hdr"><h2>Market Data — May 2026</h2><span class="sub">Actual figures · Source: IMARC Group, Statista, IndexBox, Zalora, Liputan6</span></div>
+  <div class="global-grid">
+    <div class="gdata-card"><div class="gdata-country">Indonesia Footwear 2024</div><div class="gdata-val">$3.02B</div><div class="gdata-desc">Total market. Proyeksi $4.59B di 2033 · CAGR 4.26%</div></div>
+    <div class="gdata-card"><div class="gdata-country">Segmen Wanita</div><div class="gdata-val">40%</div><div class="gdata-desc">Wanita kuasai 40% pasar footwear Indonesia — target utama Mimosabi</div></div>
+    <div class="gdata-card"><div class="gdata-country">ID Shoe Exports</div><div class="gdata-val">$6.5B</div><div class="gdata-desc">Export 2024, up 9% YoY. Indonesia ranks #4 globally.</div></div>
+    <div class="gdata-card"><div class="gdata-country">Tren 2026 · Zalora</div><div class="gdata-val">🔥 HOT</div><div class="gdata-desc">Flat shoes feminine & retro = tren #1 2026. Mary jane & ballet sedang puncak.</div></div>
+    <div class="gdata-card"><div class="gdata-country">Custom Shoes Growth</div><div class="gdata-val">+35%</div><div class="gdata-desc">Handpainted & custom tumbuh 35% YoY di marketplace Indonesia 2025</div></div>
+    <div class="gdata-card"><div class="gdata-country">Global Footwear 2030</div><div class="gdata-val">$588B</div><div class="gdata-desc">Global projection 2030 · CAGR 4.3% · artisan premium segment fastest growing</div></div>
+  </div>
+  <div class="why-now">
+    <div class="why-now-title">Why Now — Tailwinds for Mimosabi Comeback 2026</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px">
+      <div style="font-size:12px;class='why-card'"><strong>2026 Trend = Mimosabi DNA</strong>Flat shoes feminine & retro (ballet, mary jane) = tren #1 tahun ini per Zalora, runway internasional. Ini tepat produk andalan Mimosabi.</div>
+      <div style="font-size:12px;class='why-card'"><strong>Active Local Market</strong>Shift ke produk lokal & sustainable menguat. #BanggaBuatanIndonesia bukan slogan — buyer aktif mencari brand artisan handmade.</div>
+      <div style="font-size:12px;class='why-card'"><strong>Heritage = Competitive Moat</strong>17+ years, exported to 3 continents, featured on Trans7 — cannot be replicated by anyone. Mimosabi's story is a priceless premium asset.</div>
+      <div style="font-size:12px;class='why-card'"><strong>TikTok = Organic Discovery</strong>Handmade shoe making process content consistently goes viral in Indonesia. @shoemakerpenni has a unique angle: artisan + music + crafty = authentic sought-after content.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FORECAST DESIGN STATIC -->
+<div class="section">
+  <div class="section-hdr"><h2>🔮 Forecast Next Design</h2><span class="sub">Design recommendations based on May 2026 trends · Select "Forecast Design" mode for real-time AI deep-dive</span></div>
+  <div class="forecast-grid" id="forecastGrid"></div>
+  <p style="font-size:10px;color:rgba(245,239,230,.25);margin-top:12px;font-family:'Space Mono',monospace;letter-spacing:.05em">↑ Pre-loaded from May 2026 trend data · Select "Forecast Design" mode then click Analyze for AI deep-dive with real-time web search</p>
+</div>
+
+<!-- BRAND TIMELINE -->
+<div class="section">
+  <div class="section-hdr"><h2>Mimosabi — Brand Timeline & Roadmap</h2><span class="sub">From founding in 2008 to the 2026 comeback</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;background:rgba(245,242,236,.4);border:2px solid var(--ink);border-radius:4px;padding:28px;box-shadow:4px 4px 0 var(--ink)">
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">April 2008 — Founded</div><div class="tl-title">Mimosabi Founded in Cimahi</div><div class="tl-desc">Penni Ahlani Ardian & Lulu Sayyidatu memulai di Padasuka Indah. Rekrut & latih pemuda lokal — memberi penghasilan tetap bagi yang sebelumnya menganggur.</div><span class="tl-chip chip-done">Established</span></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2009–2011 — Growth</div><div class="tl-title">Ekspansi Nasional & Ekspor Pertama</div><div class="tl-desc">Produk menjangkau seluruh Indonesia. Ekspor ke Singapura & Swedia. Diliput Antara Foto. Harga Rp 105–125rb/pasang — demand sangat tinggi.</div><span class="tl-chip chip-done">Peak Era</span></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2015–2016 — Peak Visibility</div><div class="tl-title">Featured on Trans7 — Pagi Pagi</div><div class="tl-desc">Featured "Shoe Painting with Pak Penni" on national TV. Exports to Asia, Europe, America. 150+ collection designs, 15+ active artisans, a dedicated production village in Bandung.</div><span class="tl-chip chip-done">National TV</span></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2017–2023 — Hiatus</div><div class="tl-title">Dormant Period</div><div class="tl-desc">Various conditions led to a multi-year hiatus. Brand went into hibernation — but heritage, artisan skills, and story remained intact as assets.</div><span class="tl-chip" class="tl-chip" style="background:rgba(45,48,24,.06);color:var(--muted);border:1.5px solid var(--muted)">Dormant</span></div>
+      <div class="tl-item active"><div class="tl-dot"></div><div class="tl-year">2024–2026 ← NOW</div><div class="tl-title">Mimosabi Reborn</div><div class="tl-desc">mimosabi.com aktif. Shopee & Tokopedia reopen (@shoemakerpenni). Instagram & TikTok (@penniardian). Tren 2026 favorit flat shoes — timing paling sempurna dalam 10 tahun.</div><span class="tl-chip chip-now">Action Time</span></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2026 Q3–Q4 — Planned</div><div class="tl-title">Export Relaunch + New Collection</div><div class="tl-desc">Target: global Etsy, INACRAFT 2026, LPEI program. Q3 collection forecast: Coquette Mary Jane + Earth Tone Canvas. Premium custom painted line Rp 500–800k.</div><span class="tl-chip chip-plan">Planned</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- INVESTOR BRIEF -->
+<div class="section">
+  <div class="investor-wrap">
+    <div class="investor-title">Strategic Verdict — Untuk Investor & Partner</div>
+    <p style="font-size:14px;line-height:1.85;max-width:800px;margin-bottom:18px">Mimosabi holds a rare position: an artisan handmade shoes brand with <strong style="color:var(--cream)">17+ tahun heritage</strong>, pernah menembus pasar Eropa dan Amerika, kini reborn tepat saat tren 2026 mengarah ke flat shoes feminine & crafty. Pasar footwear Indonesia <strong style="color:var(--cream)">$3.02B (2024) → $4.59B (2033)</strong>, women's segment 40%. No other brand has the combination: <em style="color:var(--gold)">authenticity + heritage + handmade + community empowerment + proven export track record.</em></p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px">
+      <div class="inv-card"><strong style="color:var(--cream);display:block;margin-bottom:4px">✓ Proven Brand</strong>17 years operating, former EU exporter, national TV coverage — this is a revival, not a startup.</div>
+      <div class="inv-card"><strong style="color:var(--cream);display:block;margin-bottom:4px">✓ Massive Market</strong>Indonesia footwear $3.02B → $4.59B by 2033. Women's segment = 40% share.</div>
+      <div class="inv-card"><strong style="color:var(--cream);display:block;margin-bottom:4px">✓ Heritage Moat</strong>Artisan story + community empowerment = cannot be replicated by any factory.</div>
+      <div class="inv-card"><strong style="color:var(--cream);display:block;margin-bottom:4px">✓ Trend Timing</strong>Tren 2026 = flat shoes feminine & retro. Ini tepat DNA produk Mimosabi.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider" style="margin:8px auto 0"><div class="divider-line"></div></div>
+
+<!-- AI ANALYSIS RESULTS -->
+<div class="section" style="margin-top:32px">
+  <div class="prog-wrap" id="progWrap"><div class="prog-fill" id="progFill"></div></div>
+  <div class="err" id="errBox"></div>
+  <div class="thinking" id="thinkBox">
+    <div class="thinking-lbl"><div class="dots"><span></span><span></span><span></span></div><span id="thinkLbl">Menganalisis...</span></div>
+    <div class="thinking-txt" id="thinkTxt">Menyiapkan penelitian pasar real-time...</div>
+  </div>
+  <div class="result-wrap" id="resultWrap">
+    <div class="meta-chips" id="metaChips"></div>
+    <div id="resultCards"></div>
+  </div>
+</div>
+
+<!-- EXPORT -->
+<div class="section">
+  <div class="section-hdr"><h2>Export & Download</h2><span class="sub">Unduh hasil analisis untuk presentasi, arsip, atau investor deck</span></div>
+  <div class="export-grid">
+    <div class="exp-card"><div class="exp-icon">📄</div><div class="exp-title">PDF Report</div><div class="exp-desc">Laporan lengkap siap print & presentasi investor</div><button class="exp-btn" id="btnPDF" onclick="exportPDF()" disabled>Download PDF</button></div>
+    <div class="exp-card"><div class="exp-icon">📊</div><div class="exp-title">Excel / CSV</div><div class="exp-desc">Raw data for independent analysis</div><button class="exp-btn" id="btnExcel" onclick="exportExcel()" disabled>Download Excel</button></div>
+    <div class="exp-card"><div class="exp-icon">📑</div><div class="exp-title">PPT Outline</div><div class="exp-desc">Investor / partner deck outline</div><button class="exp-btn" id="btnPPT" onclick="exportPPT()" disabled>Download PPT</button></div>
+    <div class="exp-card"><div class="exp-icon">🗂</div><div class="exp-title">JSON Raw</div><div class="exp-desc">Raw data for technical integration</div><button class="exp-btn" id="btnJSON" onclick="exportJSON()" disabled>Download JSON</button></div>
+  </div>
+  <div class="export-includes">
+    <div class="export-includes-title">What's included in every export</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:5px;font-size:11px;color:var(--muted);line-height:1.8">
+      <div>✓ Market data: size, growth, women's segment</div>
+      <div>✓ Buyer profile: 4 segments, cities, repeat rate</div>
+      <div>✓ Pricing: budget/mid/premium, sweet spot</div>
+      <div>✓ Competitors: names, pricing, platforms, gaps</div>
+      <div>✓ Social media: TikTok, IG, content strategy</div>
+      <div>✓ Production: units, capital, margin, break-even</div>
+      <div>✓ Design forecast: 6 collections + trend scores</div>
+      <div>✓ Export: target countries, platforms, pricing</div>
+      <div>✓ Mimosabi brand timeline + 2026 roadmap</div>
+      <div>✓ Strategic verdict investor brief</div>
+    </div>
+  </div>
+</div>
+
+<div class="wmark">MIMOSABI MARKET INTELLIGENCE · WALK CRAFTY · CIMAHI, WEST JAVA · MAY 2026</div>
+
+<script>
+// ═══ STATE ═══
+
+let lastResult = null;
+
+const QUICK_TAGS = [
+  'mary jane patchwork','higher flats canvas','handmade slides',
+  'coquette flat shoes','custom painted shoes','earth tone collection','boho slides 2026'
+];
+
+const FORECAST_STATIC = [
+  { icon:'🎀', title:'Coquette Mary Jane', desc:'Wide strap + small ribbon + ruffle detail. Dusty rose, vanilla, baby blue tones. "Coquette aesthetic" = trend #1 for Gen Z Indonesia 2026.', score:94 },
+  { icon:'🌿', title:'Earth Tone Canvas Flats', desc:'Olive, terracotta, sage + batik patchwork or local weave application. Sustainable + artisan + local = triple win on marketplaces.', score:88 },
+  { icon:'🎨', title:'Handpainted Statement Slides', desc:'Slides with hand-painted floral or abstract motifs. Custom per order. Premium pricing Rp 450–750k. Making-of content = viral TikTok material.', score:85 },
+  { icon:'🪡', title:'Patchwork Peep-Toe Flats', desc:'Peep-toe making a comeback on 2026 runways (Simone Rocha, Chloé). Mimosabi + patchwork = strong differentiation vs mass market competitors.', score:79 },
+  { icon:'🤎', title:'Neutral Slingback Higher Flats', desc:'Heel slingback strap + nude/cream/light brown. Formal-casual crossover. Target: career women 28–40. Most stable volume seller.', score:74 },
+  { icon:'✨', title:'Jelujur Tangan Heritage Edition', desc:'Revive Mimosabi's signature hand-stitch technique as a limited collection. Branding: "17 years of craft, only 50 pairs." Premium pricing fully justified.', score:71 },
+];
+
+// ═══ FORECAST RENDER ═══
+function renderForecast() {
+  document.getElementById('forecastGrid').innerHTML = FORECAST_STATIC.map((f,i) => `
+    <div class="fcard">
+      <div class="fcard-rank">${i+1}</div>
+      <div class="fcard-icon">${f.icon}</div>
+      <div class="fcard-title">${f.title}</div>
+      <div class="fcard-desc">${f.desc}</div>
+      <div class="fcard-score">
+        <div class="fcard-bar"><div class="fcard-fill" id="ff${i}" style="width:0%"></div></div>
+        <div class="fcard-pct">${f.score}</div>
+      </div>
+    </div>`).join('');
+  setTimeout(() => FORECAST_STATIC.forEach((f,i) => {
+    const el = document.getElementById('ff'+i);
+    if (el) el.style.width = f.score + '%';
+  }), 400);
+}
+
+// ═══ MODE & TAGS ═══
+function renderTags() {
+  document.getElementById('quickTags').innerHTML = QUICK_TAGS.map(t =>
+    `<span class="qtag" onclick="setQuery('${t}')">${t}</span>`).join('');
+}
+
+function setQuery(q) {
+  document.getElementById('queryInput').value = q;
+  document.getElementById('queryInput').focus();
+}
+
+// ═══ BUILD PROMPT ═══
+function buildPrompt(query) {
+  return `You are a Market Intelligence consultant specializing in Indonesia's footwear industry, expert in handmade artisan and creative SME segments. Use web search for the latest data (May 2026).
+
+BRAND: MIMOSABI HANDMADE SHOES
+- Founder: Penni Ahlani Ardian (@shoemakerpenni), Cimahi, West Java
+- Est. 2008, reborn 2024–2026. Products: Higher Flats, Mary Janes, Slides
+- Materials: canvas, patchwork, cotton, handpainted, hand-stitch (jelujur)
+- Target: Women 20–40, art-loving, local artisan brand enthusiasts
+- Channels: Shopee & Tokopedia (shoemakerpenni), mimosabi.com, @shoemakerpenni (IG), @penniardian (TikTok)
+- Heritage: 17+ years, exported to Asia/Europe/America, Trans7 TV 2016, 150+ designs, 15+ artisans
+- Pricing: Rp 150k–800k. Market data: Indonesia footwear $3.02B (2024), women 40% share, feminine flat shoes = trend #1 in 2026
+
+Query: ${query || '(general Mimosabi analysis)'}
+
+---
+
+Run a COMPLETE market intelligence report covering ALL four areas below. Use web search for current data.
+
+## 📊 MARKET ANALYSIS
+Current market conditions (May 2026) for "${query}" in Indonesia. Demand volume, top platforms, rising/falling trends. Buyer profile: 4 specific segments with demographics, motivation, preferred platform, price sensitivity, and top cities. Pricing landscape: budget/mid/premium ranges on Shopee & Tokopedia, Mimosabi's ideal sweet spot.
+
+## ⚔ COMPETITOR ANALYSIS
+Map 5–6 most relevant competitors for Mimosabi in this category: brand name, platform, price range, strengths, weaknesses. Positioning: where does Mimosabi sit vs competitors on price vs uniqueness? What exclusive advantages does Mimosabi have that no competitor can replicate?
+
+## 🔮 FORECAST NEXT DESIGN
+Based on May 2026 trend data (use web search), recommend 3 new designs/collections for Mimosabi. For each: collection name, design concept, materials & techniques (canvas, patchwork, handpainted, jelujur), trending colors, target buyer, price estimate (Rp), trend score (0–100), and TikTok/IG viral potential. End with ONE hero collection to make immediately.
+
+## 🌏 EXPORT OPPORTUNITIES
+Top 3 export markets for Mimosabi's handmade shoes. Per market: demand level, best platform (Etsy etc.), price in USD/EUR, entry barriers. Best storytelling angle for global buyers. Concrete 3-step action plan to start/restart exports within 90 days.
+
+## ✦ TOP 5 ACTION ITEMS
+The 5 most important things Mimosabi should do in the next 30–60 days across all areas above. Specific, measurable, realistic.
+
+---
+Format: ## heading per section, **bold** for key numbers and insights. English. Use web search for current May 2026 data.`;
+}
+
+// ═══ API CALL ═══
+async function callClaude(prompt) {
+  const WORKER_URL = 'https://maika-proxy.creativemindtools8.workers.dev';
+  const endpoint = WORKER_URL + '/v1/messages';
+  const headers = { 'Content-Type':'application/json', 'anthropic-version':'2023-06-01' };
+  const res = await fetch(endpoint, {
+    method:'POST', headers,
+    body: JSON.stringify({
+      model:'claude-sonnet-4-5',
+      max_tokens:16000,
+      tools:[{ type:'web_search_20250305', name:'web_search' }],
+      messages:[{ role:'user', content:prompt }]
+    })
+  });
+  if (!res.ok) { const e = await res.json().catch(()=>({})); throw new Error(e.error?.message || 'HTTP '+res.status); }
+  return res.json();
+}
+
+// ═══ RENDER RESULT ═══
+function parseAndRender(data, query, mode, elapsed) {
+  let text = '';
+  for (const b of data.content||[]) if (b.type==='text') text += b.text||'';
+  lastResult = { query, mode, text, timestamp:new Date().toISOString(), elapsed };
+  ['btnPDF','btnExcel','btnPPT','btnJSON'].forEach(id => document.getElementById(id).disabled = false);
+  const now = new Date().toLocaleString('id-ID');
+  document.getElementById('metaChips').innerHTML = `
+    <div class="mchip"><div class="d"></div>Selesai ${now}</div>
+    <div class="mchip"><div class="d"></div>${(elapsed/1000).toFixed(1)}s</div>
+    <div class="mchip"><div class="d"></div>AI + Web Search Real-Time</div>
+    <div class="mchip"><div class="d"></div>Mode: ${mode.toUpperCase()}</div>`;
+  const secs = text.split(/\n## /).filter(Boolean);
+  document.getElementById('resultCards').innerHTML = secs.map((s,i) => {
+    const ls = s.split('\n');
+    const title = ls[0].replace(/^#+\s*/,'').replace(/[#]/g,'');
+    return `<div class="rcard"><div class="rcard-hdr"><h4>${title}</h4><button class="cbtn" onclick="copyS(this,${i})">Copy</button></div><div class="rcard-body">${md2h(ls.slice(1).join('\n'))}</div></div>`;
+  }).join('');
+  document.getElementById('resultWrap').classList.add('on');
+  document.getElementById('resultWrap').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function md2h(md) {
+  return md
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g,'<em>$1</em>')
+    .replace(/^### (.+)/gm,'<h3>$1</h3>')
+    .replace(/^## (.+)/gm,'<h3>$1</h3>')
+    .replace(/^- (.+)/gm,'<li>$1</li>')
+    .replace(/^\d+\. (.+)/gm,'<li>$1</li>')
+    .replace(/(<li>[\s\S]*?<\/li>\n?)+/g, s=>`<ul>${s}</ul>`)
+    .replace(/\n{2,}/g,'</p><p>')
+    .replace(/\n/g,' ')
+    || `<p>${md}</p>`;
+}
+
+function copyS(btn, idx) {
+  const bs = document.querySelectorAll('.rcard-body');
+  if (bs[idx]) navigator.clipboard.writeText(bs[idx].innerText).then(()=>{ btn.textContent='Copied!'; setTimeout(()=>btn.textContent='Copy',2000); });
+}
+
+// ═══ RUN ═══
+async function runAnalysis() {
+  const query = document.getElementById('queryInput').value.trim();
+  const btn = document.getElementById('goBtn');
+  const tb = document.getElementById('thinkBox');
+  const tt = document.getElementById('thinkTxt');
+  const tl = document.getElementById('thinkLbl');
+  const pw = document.getElementById('progWrap');
+  const pf = document.getElementById('progFill');
+  const eb = document.getElementById('errBox');
+  const rw = document.getElementById('resultWrap');
+  eb.classList.remove('on'); rw.classList.remove('on');
+  btn.disabled=true; btn.textContent='Analyzing...';
+  tb.classList.add('on'); pw.classList.add('on'); pf.style.width='0%';
+  // Show inline status bar
+  const sb = document.getElementById('statusBar');
+  const sl = document.getElementById('statusLabel');
+  const sm = document.getElementById('statusMsg');
+  const sf = document.getElementById('statusFill');
+  if(sb){ sb.style.display='block'; sf.style.width='0%'; }
+  const allMsgs = [
+    'Searching May 2026 flat shoes & mary jane trends...',
+    'Scanning competitor prices on Shopee & Tokopedia...',
+    'Analyzing Indonesia footwear market data...',
+    'Running competitor positioning analysis...',
+    'Forecasting next collection designs from 2026 trends...',
+    'Evaluating global export opportunities...',
+    'Building strategic action items...',
+  ];
+  tl.textContent = 'Full Analysis In Progress...';
+  if(sl) sl.textContent = 'FULL ANALYSIS IN PROGRESS';
+  const iv = setInterval(()=>{
+    const msg = ml[mi%ml.length]; mi++;
+    tt.textContent=msg;
+    if(sm) sm.textContent=msg;
+    const pct = Math.min(88,((Date.now()-t0)/75000)*100);
+    pf.style.width=pct+'%';
+    if(sf) sf.style.width=pct+'%';
+  },4000);
+  try {
+    const data = await callClaude(buildPrompt(query));
+    clearInterval(iv); pf.style.width='100%'; if(sf) sf.style.width='100%';
+    if(sl) sl.textContent='COMPLETE ✓'; if(sm) sm.textContent='Analysis ready — scroll down to view results';
+    setTimeout(()=>{ if(sb) sb.style.display='none'; },3000);
+    tb.classList.remove('on');
+    parseAndRender(data,query,'all',Date.now()-t0);
+  } catch(e) {
+    clearInterval(iv); tb.classList.remove('on'); pf.style.width='0%';
+    if(sf) sf.style.width='0%';
+    if(sl) sl.textContent='ERROR';
+    if(sm) sm.textContent='Request failed — see error below';
+    setTimeout(()=>{ if(sb) sb.style.display='none'; },4000);
+    eb.textContent='Error: '+e.message; eb.classList.add('on'); console.error(e);
+  } finally {
+    btn.disabled=false; btn.textContent='Analyze ↗';
+    setTimeout(()=>pw.classList.remove('on'),2000);
+  }
+}
+
+document.getElementById('queryInput').addEventListener('keydown', e=>{ if(e.key==='Enter') runAnalysis(); });
+
+// ═══ EXPORTS ═══
+function exportJSON() {
+  if (!lastResult) return;
+  dl(new Blob([JSON.stringify(lastResult,null,2)],{type:'application/json'}),`mimosabi-intel-${Date.now()}.json`);
+}
+function exportPPT() {
+  if (!lastResult) return;
+  const outline = lastResult.text.split('\n').map(l=>{
+    if(l.startsWith('## ')) return `\nSLIDE: ${l.replace('## ','')}\n${'─'.repeat(40)}`;
+    if(l.startsWith('### ')) return `  • ${l.replace('### ','')}`;
+    if(l.startsWith('- ')) return `    - ${l.replace('- ','')}`;
+    return l ? `  ${l}` : '';
+  }).join('\n');
+  const c = `MIMOSABI MARKET INTELLIGENCE — PPT OUTLINE\n${'═'.repeat(50)}\nQuery: ${lastResult.query||'(umum)'}\nMode: ${lastResult.mode}\nGenerated: ${new Date(lastResult.timestamp).toLocaleString('id-ID')}\n${'═'.repeat(50)}\n\n${outline}`;
+  dl(new Blob([c],{type:'text/plain'}),`mimosabi-ppt-${Date.now()}.txt`);
+}
+function exportExcel() {
+  if (!lastResult) return;
+  const rows=[['MIMOSABI MARKET INTELLIGENCE'],['Query',lastResult.query||'(umum)'],['Mode',lastResult.mode],['Tanggal',new Date(lastResult.timestamp).toLocaleString('id-ID')],['Durasi (s)',(lastResult.elapsed/1000).toFixed(1)],[''],['HASIL ANALISIS'],['---'],...lastResult.text.split('\n').map(l=>[l])];
+  const csv=rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+  dl(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'}),`mimosabi-data-${Date.now()}.csv`);
+}
+function exportPDF() {
+  if (!lastResult) return;
+  const w=window.open('','_blank');
+  w.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Mimosabi Intelligence Report</title>
+  <style>body{font-family:Georgia,serif;max-width:800px;margin:40px auto;color:#1a1410;line-height:1.7}h1{font-size:26px;border-bottom:3px solid #C4714A;padding-bottom:10px;color:#C4714A}h2{font-size:17px;color:#8B5E3C;margin-top:26px;border-left:4px solid #C9A84C;padding-left:10px}h3{font-size:14px;color:#1a1410;margin-top:14px}.meta{background:#f5efe6;padding:10px 14px;border-radius:4px;font-size:12px;margin-bottom:20px}strong{color:#C4714A}@media print{body{margin:20px}}</style></head><body>
+  <h1>MIMOSABI Market Intelligence Report</h1>
+  <div class="meta"><strong>Query:</strong> ${lastResult.query||'(umum)'} &nbsp;|&nbsp; <strong>Mode:</strong> ${lastResult.mode} &nbsp;|&nbsp; <strong>Tanggal:</strong> ${new Date(lastResult.timestamp).toLocaleString('id-ID')} &nbsp;|&nbsp; <strong>Durasi:</strong> ${(lastResult.elapsed/1000).toFixed(1)}s</div>
+  ${lastResult.text.replace(/## (.+)/g,'<h2>$1</h2>').replace(/### (.+)/g,'<h3>$1</h3>').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>')}
+  <script>window.onload=()=>window.print()<\/script></body></html>`);
+  w.document.close();
+}
+function dl(blob,name){ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; a.click(); URL.revokeObjectURL(a.href); }
+
+// ═══ INIT ═══
+renderTags();
+renderForecast();
+</script>
+</body>
+</html>
